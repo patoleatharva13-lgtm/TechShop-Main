@@ -78,14 +78,20 @@ src
 
 ### Home Page
 
-![Home Page](./screenshots/home.png)
+![Home Page](./screenshots/home1.png)
+
+![Home Page](./screenshots/home2.png)
 
 ---
+### Product Page
+
+![Product Page](./screenshots/products.png)
+
 
 
 ### About Page
 
-![About Page](./screenshots/about.png)
+![About Page](./screenshots/About.png)
 
 ---
 
