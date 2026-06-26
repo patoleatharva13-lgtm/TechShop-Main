@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { supabase } from "./supabase";
 
@@ -11,8 +11,19 @@ import AddProduct from "./pages/AddProduct";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 
+// Import Login & Signup
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+
 function App() {
   const [products, setProducts] = useState([]);
+
+  const location = useLocation();
+
+  // Hide Navbar & Footer on Login and Signup pages
+  const hideLayout =
+    location.pathname === "/" ||
+    location.pathname === "/signup";
 
   useEffect(() => {
     getProducts();
@@ -32,11 +43,16 @@ function App() {
 
   return (
     <>
-      <Navbar />
+      {!hideLayout && <Navbar />}
 
       <Routes>
+        {/* Authentication */}
+        <Route path="/" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+
+        {/* Website */}
         <Route
-          path="/"
+          path="/home"
           element={<Home products={products} />}
         />
 
@@ -50,11 +66,18 @@ function App() {
           element={<AddProduct />}
         />
 
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route
+          path="/about"
+          element={<About />}
+        />
+
+        <Route
+          path="/contact"
+          element={<Contact />}
+        />
       </Routes>
 
-      <Footer />
+      {!hideLayout && <Footer />}
     </>
   );
 }
